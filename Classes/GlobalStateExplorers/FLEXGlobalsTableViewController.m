@@ -221,12 +221,11 @@ typedef NS_ENUM(NSUInteger, FLEXGlobalsRow) {
             case FLEXGlobalsRowCount:
                 break;
         }
-
+        if (defaultRowIndex == FLEXGlobalsRowCustomFileBrowser && [FLEXManager sharedManager].customFilePath.length <= 0){
+            continue;
+        }
         NSParameterAssert(titleFuture);
         NSParameterAssert(viewControllerFuture);
-        if (defaultRowIndex == FLEXGlobalsRowCustomFileBrowser && [FLEXManager sharedManager].customFilePath.length <= 0){
-            break;
-        }
         [defaultGlobalEntries addObject:[FLEXGlobalsTableViewControllerEntry entryWithNameFuture:titleFuture viewControllerFuture:viewControllerFuture]];
     }
 
