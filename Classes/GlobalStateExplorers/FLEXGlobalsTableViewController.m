@@ -27,6 +27,7 @@ typedef NS_ENUM(NSUInteger, FLEXGlobalsRow) {
     FLEXGlobalsRowSystemLog,
     FLEXGlobalsRowLiveObjects,
     FLEXGlobalsRowFileBrowser,
+    FLEXGlobalsRowGroupFileBrowser,
     FLEXGlobalsCookies,    
     FLEXGlobalsRowSystemLibraries,
     FLEXGlobalsRowAppClasses,
@@ -185,6 +186,14 @@ typedef NS_ENUM(NSUInteger, FLEXGlobalsRow) {
             case FLEXGlobalsRowFileBrowser:
                 titleFuture = ^NSString *{
                     return @"📁  File Browser";
+                };
+                viewControllerFuture = ^UIViewController *{
+                    return [[FLEXFileBrowserTableViewController alloc] init];
+                };
+                break;
+            case FLEXGlobalsRowGroupFileBrowser:
+                titleFuture = ^NSString *{
+                    return @"📁  Group File Browser";
                 };
                 viewControllerFuture = ^UIViewController *{
                     return [[FLEXFileBrowserTableViewController alloc] init];
