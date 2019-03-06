@@ -51,6 +51,12 @@
     return self;
 }
 
+- (nullable NSString *)groupPathWithGroupID:(NSString *)groupID{
+    NSURL *url = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:groupID];
+    NSString *path = url.path;
+    return path;
+}
+
 - (FLEXWindow *)explorerWindow
 {
     NSAssert([NSThread isMainThread], @"You must use %@ from the main thread only.", NSStringFromClass([self class]));

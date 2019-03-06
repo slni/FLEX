@@ -21,6 +21,19 @@ typedef UIViewController *(^FLEXCustomContentViewerFuture)(NSData *data);
 - (void)hideExplorer;
 - (void)toggleExplorer;
 
+/**
+ 用户自定义查看的沙盒路径(eg:group path, tunnel path)
+ */
+@property (nonatomic, copy) NSString *customFilePath;
+
+/**
+ 获取共享文件路径
+
+ @param groupID 苹果后台配置的groupID
+ @return 共享文件路径
+ */
+- (nullable NSString *)groupPathWithGroupID:(NSString *)groupID;
+
 #pragma mark - Network Debugging
 
 /// If this property is set to YES, FLEX will swizzle NSURLConnection*Delegate and NSURLSession*Delegate methods

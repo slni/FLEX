@@ -27,7 +27,7 @@ typedef NS_ENUM(NSUInteger, FLEXGlobalsRow) {
     FLEXGlobalsRowSystemLog,
     FLEXGlobalsRowLiveObjects,
     FLEXGlobalsRowFileBrowser,
-    FLEXGlobalsRowGroupFileBrowser,
+    FLEXGlobalsRowCustomFileBrowser,
     FLEXGlobalsCookies,    
     FLEXGlobalsRowSystemLibraries,
     FLEXGlobalsRowAppClasses,
@@ -185,19 +185,18 @@ typedef NS_ENUM(NSUInteger, FLEXGlobalsRow) {
                 
             case FLEXGlobalsRowFileBrowser:
                 titleFuture = ^NSString *{
-                    return @"📁  File Browser";
+                    return @"📁  App File Browser";
                 };
                 viewControllerFuture = ^UIViewController *{
                     return [[FLEXFileBrowserTableViewController alloc] init];
                 };
                 break;
-            case FLEXGlobalsRowGroupFileBrowser:
+            case FLEXGlobalsRowCustomFileBrowser:
                 titleFuture = ^NSString *{
-                    return @"📁  Group File Browser";
+                    return @"📁  Custom File Browser";
                 };
                 viewControllerFuture = ^UIViewController *{
-                    NSURL *url = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.com.siyanpro.www"];
-                    NSString *path = url.path;
+                    NSString *path = [FLEXManager sharedManager].customFilePath;
                     return [[FLEXFileBrowserTableViewController alloc] initWithPath:path];
                 };
                 break;
@@ -225,7 +224,9 @@ typedef NS_ENUM(NSUInteger, FLEXGlobalsRow) {
 
         NSParameterAssert(titleFuture);
         NSParameterAssert(viewControllerFuture);
-
+        if (defaultRowIndex == FLEXGlobalsRowCustomFileBrowser && [FLEXManager sharedManager].customFilePath.length <= 0){
+            break;
+        }
         [defaultGlobalEntries addObject:[FLEXGlobalsTableViewControllerEntry entryWithNameFuture:titleFuture viewControllerFuture:viewControllerFuture]];
     }
 
