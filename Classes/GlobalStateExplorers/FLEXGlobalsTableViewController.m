@@ -196,7 +196,9 @@ typedef NS_ENUM(NSUInteger, FLEXGlobalsRow) {
                     return @"📁  Group File Browser";
                 };
                 viewControllerFuture = ^UIViewController *{
-                    return [[FLEXFileBrowserTableViewController alloc] init];
+                    NSURL *url = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.com.siyanpro.www"];
+                    NSString *path = url.path;
+                    return [[FLEXFileBrowserTableViewController alloc] initWithPath:path];
                 };
                 break;
 
